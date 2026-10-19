@@ -1,0 +1,398 @@
+@import "tailwindcss";
+
+@theme {
+    --color-brand: #1d4a91;
+    --color-brand-deep: #163a74;
+    --color-ink: #1b2433;
+    --color-muted: #5d6675;
+    --color-tint: #eef2f9;
+    --color-rule: #cfd6e2;
+    --color-desk: #e7eaf0;
+    --color-paper: #ffffff;
+    --font-sans: "Archivo", "Hind Siliguri", "Helvetica Neue", Arial, sans-serif;
+    --font-bn: "Hind Siliguri", "Archivo", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: var(--color-desk);
+    -webkit-font-smoothing: antialiased;
+}
+
+.bn {
+    font-family: var(--font-bn);
+    font-weight: 500;
+}
+
+/* —— A4 invoice sheet (print-critical) —— */
+.invoice-sheet {
+    --fit: 1;
+    --ink: #1b2433;
+    --muted: #5d6675;
+    --brand: #1d4a91;
+    --brand-deep: #163a74;
+    --tint: #eef2f9;
+    --rule: #cfd6e2;
+    --paper: #ffffff;
+    --sans: "Archivo", "Hind Siliguri", "Helvetica Neue", Arial, sans-serif;
+    --bn: "Hind Siliguri", "Archivo", sans-serif;
+
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 2px 18px rgba(20, 35, 60, 0.15);
+    padding: calc(8mm * var(--fit)) calc(10mm * var(--fit)) calc(7mm * var(--fit));
+    display: flex;
+    flex-direction: column;
+    font-family: var(--sans);
+    font-size: calc(8.2pt * var(--fit));
+    line-height: 1.2;
+    color: var(--ink);
+    overflow: hidden;
+    position: relative;
+    color-scheme: light;
+}
+
+.invoice-sheet .num {
+    font-variant-numeric: tabular-nums;
+}
+
+.invoice-sheet .watermark {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.invoice-sheet .watermark i {
+    position: absolute;
+    width: calc(46mm * var(--fit));
+    aspect-ratio: 280 / 259;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.075;
+    mix-blend-mode: multiply;
+    transform: translate(-50%, -50%);
+}
+
+.invoice-sheet .head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: calc(4mm * var(--fit));
+    padding-bottom: calc(3mm * var(--fit));
+    border-bottom: calc(2.2pt * var(--fit)) solid var(--brand);
+}
+
+.invoice-sheet .head > div:first-child {
+    min-width: 0;
+}
+
+.invoice-sheet .brand-name {
+    font-weight: 800;
+    font-size: calc(20pt * var(--fit));
+    letter-spacing: 0.01em;
+    color: var(--brand);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.invoice-sheet .brand-line {
+    color: var(--muted);
+    font-size: calc(8pt * var(--fit));
+    margin-top: calc(1.6mm * var(--fit));
+}
+
+.invoice-sheet .doc-tag {
+    text-align: right;
+}
+
+.invoice-sheet .doc-tag .label {
+    display: inline-block;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 700;
+    font-size: calc(9.5pt * var(--fit));
+    letter-spacing: 0.08em;
+    padding: calc(1.6mm * var(--fit)) calc(3.2mm * var(--fit));
+    border-radius: calc(1mm * var(--fit));
+}
+
+.invoice-sheet .details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(4mm * var(--fit));
+    margin-top: calc(3mm * var(--fit));
+}
+
+.invoice-sheet .box {
+    border: calc(0.6pt * var(--fit)) solid var(--rule);
+    border-radius: calc(1mm * var(--fit));
+}
+
+.invoice-sheet .box h3 {
+    margin: 0;
+    font-size: calc(8.4pt * var(--fit));
+    color: var(--brand);
+    background: var(--tint);
+    padding: calc(1.3mm * var(--fit)) calc(2.6mm * var(--fit));
+    border-bottom: calc(0.6pt * var(--fit)) solid var(--rule);
+}
+
+.invoice-sheet .box dl {
+    margin: 0;
+    padding: calc(1.2mm * var(--fit)) calc(2.6mm * var(--fit));
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: calc(2.5mm * var(--fit));
+    row-gap: calc(0.4mm * var(--fit));
+}
+
+.invoice-sheet .box dt {
+    font-weight: 600;
+}
+
+.invoice-sheet .box dd {
+    margin: 0;
+}
+
+.invoice-sheet .section {
+    margin-top: calc(2.8mm * var(--fit));
+}
+
+.invoice-sheet table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.invoice-sheet th {
+    background: var(--brand);
+    color: #fff;
+    font-weight: 600;
+    font-size: calc(8pt * var(--fit));
+    padding: calc(1mm * var(--fit)) calc(1.8mm * var(--fit));
+    text-align: left;
+    border: calc(0.6pt * var(--fit)) solid var(--brand);
+}
+
+.invoice-sheet td {
+    padding: calc(0.55mm * var(--fit)) calc(1.8mm * var(--fit));
+    border: calc(0.6pt * var(--fit)) solid var(--rule);
+    vertical-align: middle;
+}
+
+.invoice-sheet tbody tr:nth-child(even) td {
+    background: #f7f9fc;
+}
+
+.invoice-sheet .c {
+    text-align: center;
+}
+
+.invoice-sheet .r {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.invoice-sheet col.sl {
+    width: 7mm;
+}
+
+.invoice-sheet col.brandc {
+    width: 23mm;
+}
+
+.invoice-sheet col.qty {
+    width: 15mm;
+}
+
+.invoice-sheet col.rate {
+    width: 22mm;
+}
+
+.invoice-sheet col.tot {
+    width: 24mm;
+}
+
+.invoice-sheet .grp td {
+    background: var(--tint) !important;
+    color: var(--brand-deep);
+    font-weight: 700;
+    font-size: calc(8pt * var(--fit));
+    letter-spacing: 0.04em;
+}
+
+.invoice-sheet tr.gap td {
+    border: 0 !important;
+    background: transparent !important;
+    height: calc(3mm * var(--fit));
+    padding: 0;
+}
+
+.invoice-sheet .sec-sum td,
+.invoice-sheet tr.sec-sum td {
+    background: var(--tint) !important;
+    font-weight: 600;
+}
+
+.invoice-sheet .sec-sum .lbl {
+    text-align: right;
+}
+
+.invoice-sheet tr.sec-sum.net td {
+    color: var(--brand-deep);
+    font-weight: 700;
+}
+
+.invoice-sheet .grand {
+    margin-top: calc(3mm * var(--fit));
+    display: grid;
+    grid-template-columns: 1fr 62mm;
+    gap: calc(4mm * var(--fit));
+    align-items: stretch;
+}
+
+.invoice-sheet .breakdown {
+    padding: calc(1.8mm * var(--fit)) calc(2.6mm * var(--fit));
+    display: grid;
+    gap: calc(0.9mm * var(--fit));
+    align-content: center;
+}
+
+.invoice-sheet .breakdown > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.invoice-sheet .words {
+    border-top: calc(0.6pt * var(--fit)) dashed var(--rule);
+    padding-top: calc(1.2mm * var(--fit));
+    margin-top: calc(0.6mm * var(--fit));
+}
+
+.invoice-sheet .words em {
+    font-style: italic;
+}
+
+.invoice-sheet .total-card {
+    background: var(--brand);
+    color: #fff;
+    border-radius: calc(1.2mm * var(--fit));
+    padding: calc(2.4mm * var(--fit)) calc(3.2mm * var(--fit));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.invoice-sheet .total-card .t-label {
+    font-size: calc(8pt * var(--fit));
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.invoice-sheet .total-card .t-val {
+    font-size: calc(17pt * var(--fit));
+    font-weight: 800;
+    margin-top: calc(0.8mm * var(--fit));
+    font-variant-numeric: tabular-nums;
+}
+
+.invoice-sheet .note {
+    margin-top: calc(2mm * var(--fit));
+    font-style: italic;
+    color: var(--muted);
+    font-size: calc(7.8pt * var(--fit));
+}
+
+.invoice-sheet .signs {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: calc(10mm * var(--fit));
+}
+
+.invoice-sheet .sig {
+    font-size: calc(7.4pt * var(--fit));
+}
+
+.invoice-sheet .sig .line {
+    width: 55mm;
+    border-top: calc(0.7pt * var(--fit)) solid var(--ink);
+    margin-bottom: calc(1.2mm * var(--fit));
+}
+
+.invoice-sheet .sig.right {
+    text-align: right;
+}
+
+.invoice-sheet .sig.right .line {
+    margin-left: auto;
+}
+
+.invoice-sheet .sig .who {
+    font-weight: 700;
+}
+
+.invoice-sheet .sig .role {
+    color: var(--muted);
+    font-style: italic;
+}
+
+.invoice-sheet .foot {
+    margin-top: calc(3mm * var(--fit));
+    padding-top: calc(1.6mm * var(--fit));
+    border-top: calc(0.6pt * var(--fit)) solid var(--rule);
+    text-align: center;
+    color: var(--muted);
+    font-size: calc(7.2pt * var(--fit));
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    body {
+        background: #fff !important;
+        padding: 0 !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .print-only-sheet {
+        position: static !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+    }
+
+    .invoice-sheet {
+        box-shadow: none;
+        margin: 0;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
